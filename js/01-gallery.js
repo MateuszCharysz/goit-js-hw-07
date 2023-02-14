@@ -1,19 +1,19 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 //help
-const log = console.log
+const log = console.log;
 log(galleryItems);
 
 //DOM elements
-const gallery = document.querySelector(".gallery")
-log(gallery)
+const gallery = document.querySelector('.gallery');
+log(gallery);
 
 //callback/functions
 const drawGallery = () => {
-    let protoGallery = ""
-    let protoGalleryItem =""
-    galleryItems.forEach((image) =>{
-        protoGalleryItem = `<div class="gallery__item">
+  let protoGallery = '';
+  let protoGalleryItem = '';
+  galleryItems.forEach(image => {
+    protoGalleryItem = `<div class="gallery__item">
   <a class="gallery__link" href="${image.original}">
     <img
       class="gallery__image"
@@ -23,26 +23,25 @@ const drawGallery = () => {
     />
   </a>
 </div>`;
-protoGallery +=protoGalleryItem
-    })
-    gallery.insertAdjacentHTML('beforeend', protoGallery)
-}
+    protoGallery += protoGalleryItem;
+  });
+  gallery.insertAdjacentHTML('beforeend', protoGallery);
+};
 
-drawGallery()
-
+drawGallery();
 
 //Events
-
-// Example
-// document.querySelector('button.image').onclick = () => {
-//   basicLightbox
-//     .create(
-//       `
-// 		<img width="1400" height="900" src="https://placehold.it/1400x900">
-// 	`,
-//     )
-//     .show();
-// };
-
-
-
+gallery.addEventListener('click', event => {
+  event.preventDefault();
+  if (event.target.nodeName !== 'IMG') return;
+  log(event.target);
+  basicLightbox
+    .create(
+      `
+		<img alt="${event.target.getAttribute('alt')}" src="${event.target.getAttribute(
+        'data-source',
+      )}">
+	`,
+    )
+    .show();
+});
