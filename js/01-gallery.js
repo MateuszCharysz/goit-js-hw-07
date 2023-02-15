@@ -2,11 +2,11 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 //help
 const log = console.log;
-log(galleryItems);
+// log(galleryItems);
 
 //DOM elements
 const gallery = document.querySelector('.gallery');
-log(gallery);
+// log(gallery);
 
 //callback/functions
 const drawGallery = () => {
@@ -34,7 +34,7 @@ drawGallery();
 gallery.addEventListener('click', event => {
   event.preventDefault();
   if (event.target.nodeName !== 'IMG') return;
-  log(event.target);
+  // log(event.target);
   basicLightbox
     .create(
       `
@@ -42,6 +42,13 @@ gallery.addEventListener('click', event => {
         'data-source',
       )}">
 	`,
+      {
+        onShow: instance => {
+          instance.element().querySelector('div').addEventListener("keydown", event => {
+            if (event.key == 'Escape') "works";
+          });
+        },
+      },
     )
     .show();
 });
