@@ -24,10 +24,17 @@ const drawGallery = () => {
 };
 
 drawGallery();
+
+const lightbox = new SimpleLightbox('.gallery .gallery__item', {
+  captionSelector: event => event.firstElementChild,
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 //Events
 gallery.addEventListener('click', event => {
   event.preventDefault();
   if (event.target.nodeName !== 'IMG') return;
   // log(event.target);
-  
+  event.target.lightbox;
 });
