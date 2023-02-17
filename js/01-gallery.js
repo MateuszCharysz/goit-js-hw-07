@@ -35,7 +35,7 @@ gallery.addEventListener('click', event => {
   event.preventDefault();
   if (event.target.nodeName !== 'IMG') return;
   // log(event.target);
-  basicLightbox
+   basicLightbox
     .create(
       `
 		<img alt="${event.target.getAttribute('alt')}" src="${event.target.getAttribute(
@@ -43,11 +43,15 @@ gallery.addEventListener('click', event => {
       )}">
 	`,
       {
-        onShow: instance => {
-          instance.element().querySelector('div').addEventListener("keydown", event => {
-            if (event.key == 'Escape') "works";
+        onShow: instance => {          
+          document.addEventListener('keydown', event => {
+            if (event.key == 'Escape') log("works"), instance.close();
           });
         },
+        onClose: instance =>
+          document.removeEventListener('keydown', event => {
+            if (event.key == 'Escape') log('works'), instance.close();
+          }),
       },
     )
     .show();
