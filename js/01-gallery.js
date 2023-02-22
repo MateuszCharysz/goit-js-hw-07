@@ -31,7 +31,7 @@ const gallery = document.querySelector('.gallery');
 // drawGallery()
 //SECOND SOLUTION - DECLARATIVE
 const createItem = item => {
-  const itemMarkup =
+  let itemMarkup =
   `<div class="gallery__item">
   <a class="gallery__link" href="${item.original}">
     <img
@@ -45,11 +45,8 @@ const createItem = item => {
 return itemMarkup
 };
 
-const drawGallery = galleryItems.map(item => createItem(item)).join('');
+const drawGallery = galleryItems.map(item => createItem(item)).join("");
 gallery.innerHTML = drawGallery;
-log(drawGallery)
-log(gallery.innerHTML)
-log(gallery)
 
 //Events
 gallery.addEventListener('click', event => {
