@@ -9,33 +9,54 @@ const gallery = document.querySelector('.gallery');
 // log(gallery);
 
 //callback/functions
-const drawGallery = () => {
-  let protoGallery = '';
-  let protoGalleryItem = '';
-  galleryItems.forEach(image => {
-    protoGalleryItem = `<div class="gallery__item">
-  <a class="gallery__link" href="${image.original}">
+//FIRST SOLUTION - IMPERATIVE
+// const drawGallery = () => {
+//   let protoGallery = '';
+//   let protoGalleryItem = '';
+//   galleryItems.forEach(image => {
+//     protoGalleryItem = `<div class="gallery__item">
+//   <a class="gallery__link" href="${image.original}">
+//     <img
+//       class="gallery__image"
+//       src="${image.preview}"
+//       data-source="${image.original}"
+//       alt="${image.description}"
+//     />
+//   </a>
+// </div>`;
+//     protoGallery += protoGalleryItem;
+//   });
+//   gallery.insertAdjacentHTML('beforeend', protoGallery);
+// };
+// drawGallery()
+//SECOND SOLUTION - DECLARATIVE
+const createItem = item => {
+  const itemMarkup =
+  `<div class="gallery__item">
+  <a class="gallery__link" href="${item.original}">
     <img
       class="gallery__image"
-      src="${image.preview}"
-      data-source="${image.original}"
-      alt="${image.description}"
+      src="${item.preview}"
+      data-source="${item.original}"
+      alt="${item.description}"
     />
   </a>
 </div>`;
-    protoGallery += protoGalleryItem;
-  });
-  gallery.insertAdjacentHTML('beforeend', protoGallery);
+return itemMarkup
 };
 
-drawGallery();
+const drawGallery = galleryItems.map(item => createItem(item)).join('');
+gallery.innerHTML = drawGallery;
+log(drawGallery)
+log(gallery.innerHTML)
+log(gallery)
 
 //Events
 gallery.addEventListener('click', event => {
   event.preventDefault();
   if (event.target.nodeName !== 'IMG') return;
   // log(event.target);
-   basicLightbox
+  basicLightbox
     .create(
       `
 		<img alt="${event.target.getAttribute('alt')}" src="${event.target.getAttribute(
@@ -43,9 +64,9 @@ gallery.addEventListener('click', event => {
       )}">
 	`,
       {
-        onShow: instance => {          
+        onShow: instance => {
           document.addEventListener('keydown', event => {
-            if (event.key == 'Escape') log("works"), instance.close();
+            if (event.key == 'Escape') log('works'), instance.close();
           });
         },
         onClose: instance =>
