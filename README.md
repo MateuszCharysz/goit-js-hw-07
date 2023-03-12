@@ -1,6 +1,6 @@
 # JS Homework nr 7
 
-HTML/css were ready. also fallowing js file was given:
+HTML/css were ready. also following js file was given:
 
 `gallery-items.js`
 
