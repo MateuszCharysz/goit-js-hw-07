@@ -2,7 +2,7 @@
 
 HTML/css were ready. also fallowing js file was given:
 
-gallery-items.js
+`gallery-items.js`
 
 Libraries by CDN - [basicLightbox](https://basiclightbox.electerious.com/), [SimpleLightbox](https://simplelightbox.com/),
 
